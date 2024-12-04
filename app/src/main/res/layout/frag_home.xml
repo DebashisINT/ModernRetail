@@ -45,7 +45,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_profile_dummy"/>
+                        android:src="@drawable/ic_profile_dummy"
+                        android:padding="@dimen/_5sdp"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -81,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_3sdp"
+            android:scrollbarSize="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,7 +134,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_store_color"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -156,7 +158,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Stores"
+                                android:text="Stock"
                                 android:gravity="center"
                                 style="@style/text_style"
                                 android:textStyle="bold"
@@ -178,7 +180,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_stock"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -190,7 +192,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
                     style="@style/ll_style"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -228,7 +231,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_planogram"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -239,6 +242,7 @@
                         android:layout_height="match_parent"/>
 
                     <FrameLayout
+                        android:id="@+id/fl_complaint_feedback"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
@@ -274,7 +278,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_complaint"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -286,7 +290,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
                     style="@style/ll_style"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -322,9 +327,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/ic_order"
+                                android:src="@drawable/ic_order_color"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -368,9 +373,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/ic_survey"
+                                android:src="@drawable/ic_survey_color"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -382,7 +387,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
                     style="@style/ll_style"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -420,7 +426,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_merchandise"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -466,7 +472,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_calender"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -478,7 +484,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
                     style="@style/ll_style"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -516,7 +523,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_catalog"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 
@@ -562,7 +569,7 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_sales_promotion"
                                 android:scaleType="centerInside"
-                                android:padding="@dimen/_5sdp"/>
+                                android:padding="@dimen/_7sdp"/>
 
                         </androidx.cardview.widget.CardView>
 

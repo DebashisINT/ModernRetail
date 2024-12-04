@@ -3,26 +3,40 @@ package com.example.modernretail
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import com.example.modernretail.databinding.ActivityDashboardBinding
 import com.example.modernretail.others.AppUtils
+import com.example.modernretail.others.DateTimeUtils
+import com.example.modernretail.others.DialogLoading
 import com.example.modernretail.store.StoreAddFrag
 import com.google.android.material.navigation.NavigationView
 import com.vmadalin.easypermissions.EasyPermissions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 
@@ -32,7 +46,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     var binding: ActivityDashboardBinding? = null
     val dashView get() = binding!!
 
-    private lateinit var toggle: ActionBarDrawerToggle
+    public lateinit var toggle: ActionBarDrawerToggle
     private var backpressed: Long = 0
 
     public lateinit var toolbarTitle: TextView
@@ -75,8 +89,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         dashView.dashToolbar.toolbarHome.setOnClickListener(this)
         dashView.dashToolbar.toolbarNotification.setOnClickListener(this)
 
+        //setSupportActionBar(dashView.dashToolbar.customToolbar)
+        dashView.dashToolbar.toolbarHome.setOnClickListener(this)
+
         loadFrag(HomeFrag(), HomeFrag::class.java.name)
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -89,42 +107,90 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     fun loadFrag(mFrag: Fragment, tagValue: String, isAdd:Boolean = false) {
-        println("load_frag $tagValue")
-        var tag = tagValue.split(".").last().toString()
-        if (mFrag is HomeFrag) {
-            supportFragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            dashView.dashToolbar.toolbarHome.visibility = View.GONE
-        } else {
-            dashView.dashToolbar.toolbarHome.visibility = View.VISIBLE
-        }
-        if (supportFragmentManager.findFragmentByTag(tag) == null || mFrag is HomeFrag) {
-            if(isAdd){
-                supportFragmentManager.beginTransaction()
-                    .add(dashView.fragContainerView.id, mFrag, tag)
-                    .setReorderingAllowed(true)
-                    .addToBackStack(tag)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .commitAllowingStateLoss()
-            }else{
-                supportFragmentManager.beginTransaction()
-                    .replace(dashView.fragContainerView.id, mFrag, tag)
-                    .setReorderingAllowed(true)
-                    .addToBackStack(tag)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .commitAllowingStateLoss()
+        DialogLoading.show(supportFragmentManager, "")
+        lifecycleScope.launch(Dispatchers.IO) {
+            delay(50)
+            try {
+                withContext(Dispatchers.Main) {
+                    println("load_frag $tagValue")
+                    var tag = tagValue.split(".").last().toString()
+                    if (mFrag is HomeFrag) {
+                        supportFragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                        dashView.dashToolbar.toolbarHome.visibility = View.GONE
+                        dashView.dashToolbar.toolbarNotification.visibility = View.VISIBLE
+                        showHamburgerIcon()
+                    }
+                    else {
+                        dashView.dashToolbar.toolbarHome.visibility = View.VISIBLE
+                        dashView.dashToolbar.toolbarNotification.visibility = View.GONE
+                        showBackArrow()
+                    }
+                    if (supportFragmentManager.findFragmentByTag(tag) == null || mFrag is HomeFrag) {
+                        if (isAdd) {
+                            supportFragmentManager.beginTransaction()
+                                .add(dashView.fragContainerView.id, mFrag, tag)
+                                .setReorderingAllowed(true)
+                                .addToBackStack(tag)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commitAllowingStateLoss()
+                        } else {
+                            supportFragmentManager.beginTransaction()
+                                .replace(dashView.fragContainerView.id, mFrag, tag)
+                                .setReorderingAllowed(true)
+                                .addToBackStack(tag)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                    else {
+                        supportFragmentManager.popBackStackImmediate(tag, 0)
+                        /*supportFragmentManager.beginTransaction()
+                            .show(supportFragmentManager.findFragmentByTag(tag)!!)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commitAllowingStateLoss()*/
+                    }
+                }
+            }  catch (e: Exception) {
+                DialogLoading.dismiss()
             }
-        } else {
-            supportFragmentManager.popBackStackImmediate(tag, 0)
-            /*supportFragmentManager.beginTransaction()
-                .show(supportFragmentManager.findFragmentByTag(tag)!!)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commitAllowingStateLoss()*/
+            finally {
+                DialogLoading.dismiss()
+            }
         }
+
     }
 
     override fun onClick(v: View?) {
         when(v!!.id){
+            dashView.dashToolbar.toolbarHome.id -> {
+                loadFrag(HomeFrag(), HomeFrag::class.java.name)
+            }
+        }
+    }
 
+    override fun onBackPressed() {
+        DialogLoading.show(supportFragmentManager, "")
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                withContext(Dispatchers.Main) {
+                    val fm = supportFragmentManager
+                    if (fm.findFragmentById(dashView.fragContainerView.id) is HomeFrag) {
+                        DialogLoading.dismiss()
+                        if (backpressed + 2000 > System.currentTimeMillis()) {
+                            finish()
+                            super.onBackPressed()
+                        } else {
+                            Toast.makeText(this@DashboardActivity, "Press back to exit.", Toast.LENGTH_SHORT).show()
+                        }
+                        backpressed = System.currentTimeMillis()
+                    } else {
+                        delay(50)
+                        super.onBackPressed()
+                    }
+                }
+            } finally {
+                DialogLoading.dismiss()
+            }
         }
     }
 
@@ -150,7 +216,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 val imageBitmap = data?.extras?.get("data") as Bitmap
 
                 val fileDir = this.filesDir
-                val fileName = AppUtils.getCurrentDateTime().replace("-","_").replace(" ","_").replace(":","_")
+                val fileName = DateTimeUtils.getCurrentDateTime().replace("-","_").replace(" ","_").replace(":","_")
                 val photoFile = File(fileDir, "$fileName.png")
                 FileOutputStream(photoFile).use { out ->
                     imageBitmap.compress(Bitmap.CompressFormat.PNG,100,out)
@@ -168,6 +234,36 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun requestPermission(permissionList:Array<String>,reqCode:Int,msg:String){
         EasyPermissions.requestPermissions(this,msg, reqCode,*permissionList)
+    }
+
+    public fun showBackArrow() {
+        toggle.syncState()
+
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_back)
+        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 30, 30, false)
+        val scaledDrawable = BitmapDrawable(resources, scaledBitmap)
+        val colorFilter = PorterDuffColorFilter(ContextCompat.getColor(this, R.color.color_white), PorterDuff.Mode.SRC_IN)
+        scaledDrawable.colorFilter = colorFilter
+
+        dashView.dashToolbar.customToolbar.setNavigationIcon(scaledDrawable)
+        dashView.dashToolbar.customToolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+        dashView.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+    public fun showHamburgerIcon() {
+        toggle = ActionBarDrawerToggle(
+            this,
+            dashView.drawer,
+            findViewById(R.id.dashToolbar),
+            R.string.openDrawer,
+            R.string.closeDrawer
+        )
+        toggle.syncState()
+        dashView.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        dashView.drawer.addDrawerListener(toggle)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.color_white)
+
     }
 
 }

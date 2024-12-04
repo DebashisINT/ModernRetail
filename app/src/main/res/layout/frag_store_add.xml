@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/iv_store_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="@dimen/_150sdp"
                 android:src="@drawable/store_dummy"
                 android:scaleType="fitXY" />
 
@@ -71,12 +71,59 @@
                                     android:src="@drawable/ic_store" />
 
                                 <com.google.android.material.textfield.TextInputLayout
-                                    style="@style/ll_textinput_style"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/_40sdp"
-                                    android:layout_marginLeft="@dimen/_10sdp">
+                                    app:boxStrokeWidth="0dp"
+                                    app:boxStrokeWidthFocused="0dp"
+                                    app:boxBackgroundMode="filled">
+
+                                    <AutoCompleteTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Store type"
+                                        android:inputType="none"
+                                        android:background="@color/color_trans"
+                                        style="@style/text_style" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/card_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                style="@style/ll_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_store" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/ll_textinput_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp">
 
                                     <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_name"
                                         style="@style/text_style"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
@@ -118,16 +165,16 @@
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/ll_textinput_style"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_40sdp"
-                                    android:layout_marginLeft="@dimen/_10sdp">
+                                    android:layout_height="wrap_content"
+                                    android:minHeight="@dimen/_40sdp">
 
                                     <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_address"
                                         style="@style/text_style"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@color/color_trans"
-                                        android:hint="Address"
-                                        android:singleLine="true" />
+                                        android:hint="Address" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
@@ -163,10 +210,10 @@
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/ll_textinput_style"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_40sdp"
-                                    android:layout_marginLeft="@dimen/_10sdp">
+                                    android:layout_height="@dimen/_40sdp">
 
                                     <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_contact_name"
                                         style="@style/text_style"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
@@ -208,66 +255,18 @@
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/ll_textinput_style"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_40sdp"
-                                    android:layout_marginLeft="@dimen/_10sdp">
+                                    android:layout_height="@dimen/_40sdp">
 
                                     <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_contact_number"
                                         style="@style/text_style"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@color/color_trans"
                                         android:hint="Contact Number"
-                                        android:singleLine="true" />
-                                </com.google.android.material.textfield.TextInputLayout>
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_5sdp"/>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cv_shop_type"
-                            style="@style/card_style"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                style="@style/ll_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <Space
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="match_parent" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_15sdp"
-                                    android:layout_gravity="center"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/ic_store" />
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_40sdp"
-                                    app:boxStrokeWidth="0dp"
-                                    app:boxStrokeWidthFocused="0dp"
-                                    app:boxBackgroundMode="filled"
-                                    android:layout_marginLeft="@dimen/_5sdp">
-
-                                    <AutoCompleteTextView
-                                        android:id="@+id/tv_shop_type"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:hint="Store type"
-                                        android:inputType="none"
-                                        android:background="@color/color_trans"
-                                        style="@style/text_style" />
+                                        android:singleLine="true"
+                                        android:inputType="number"
+                                        android:maxLength="10"/>
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
@@ -298,16 +297,107 @@
                                     android:layout_height="@dimen/_15sdp"
                                     android:layout_gravity="center"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/ic_measurement"
-                                    app:tint="@color/color_black"/>
+                                    android:src="@drawable/ic_whatsapp" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/ll_textinput_style"
                                     android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_40sdp"
-                                    android:layout_marginLeft="@dimen/_10sdp">
+                                    android:layout_height="@dimen/_40sdp">
 
                                     <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_contact_whatsapp"
+                                        style="@style/text_style"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/color_trans"
+                                        android:hint="Whatsapp Number"
+                                        android:singleLine="true"
+                                        android:inputType="number"
+                                        android:maxLength="10"/>
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/card_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                style="@style/ll_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_mail" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/ll_textinput_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_contact_email"
+                                        style="@style/text_style"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/color_trans"
+                                        android:hint="Email"
+                                        android:singleLine="true"/>
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/card_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                style="@style/ll_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_measurement" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/ll_textinput_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_size_area"
                                         style="@style/text_style"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
@@ -317,6 +407,25 @@
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_15sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_180sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            style="@style/card_style"
+                            app:cardBackgroundColor="@color/color_button">
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btn_add_store"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Save"
+                                style="@style/button_style" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -354,13 +463,18 @@
 
         </FrameLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login"
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:text="Add"
-            android:elevation="0dp"
-            style="@style/button_style" />
+            android:layout_height="@dimen/_50sdp"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconSize="@dimen/_15sdp"
+            android:fitsSystemWindows="true"
+            app:itemIconPadding="@dimen/_10sdp"
+            app:itemTextColor="@color/color_black"
+            app:drawerLayoutCornerSize="@dimen/_10sdp"
+            app:itemShapeFillColor="@color/color_trans"
+            app:itemIconTint="@color/color_charcoal"
+            app:labelVisibilityMode="labeled"/>-->
 
     </LinearLayout>
 

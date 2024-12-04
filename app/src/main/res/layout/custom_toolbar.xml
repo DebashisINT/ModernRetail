@@ -36,9 +36,6 @@
             app:tint="@color/color_white"
             android:layout_gravity="center" />
 
-        <Space
-            android:layout_width="@dimen/_10sdp"
-            android:layout_height="match_parent"/>
 
         <ImageView
             android:id="@+id/toolbar_home"
@@ -47,7 +44,8 @@
             android:src="@drawable/ic_home"
             android:scaleType="fitXY"
             app:tint="@color/color_white"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"/>
 
         <Space
             android:layout_width="@dimen/_10sdp"

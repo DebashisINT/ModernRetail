@@ -39,7 +39,7 @@
     </style>
 
     <style name="card_style">
-        <item name="cardBackgroundColor">@color/color_blue_margin</item>
+        <item name="cardBackgroundColor">@color/color_card_back</item>
         <item name="cardCornerRadius">@dimen/_10sdp</item>
         <item name="cardElevation">@dimen/_3sdp</item>
         <item name="android:layout_margin">@dimen/_3sdp</item>

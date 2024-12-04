@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Patterns
 import android.view.inputmethod.InputMethodManager
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -57,8 +58,8 @@ object AppUtils{
         }
     }
 
-    fun getCurrentDateTime(): String {
-        val dt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
-        return dt.format(Date()).toString()
+    fun isValidEmail(email: String): Boolean {
+        return !email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
+
 }

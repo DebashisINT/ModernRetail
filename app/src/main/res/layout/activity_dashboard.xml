@@ -31,7 +31,7 @@
             app:dividerInsetStart="@dimen/_60sdp"
             app:dividerInsetEnd="@dimen/_50sdp"
             app:itemTextColor="@color/color_black"
-            app:drawerLayoutCornerSize="@dimen/_10sdp"
+            app:drawerLayoutCornerSize="@dimen/_3sdp"
             app:itemShapeFillColor="@color/color_trans"
             app:itemIconTint="@color/color_charcoal"
             app:itemIconPadding="@dimen/_20sdp"

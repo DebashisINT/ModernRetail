@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.modernretail.CompFeed.ComplaintFeedback
 import com.example.modernretail.databinding.FragHomeBinding
 import com.example.modernretail.others.DialogLoading
 import com.example.modernretail.store.StoreAddFrag
+import com.example.modernretail.store.StoreFrag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,17 +47,16 @@ class HomeFrag : Fragment(), View.OnClickListener {
 
     private fun proceed() {
         homeView.flStores.setOnClickListener(this)
+        homeView.flComplaintFeedback.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
             homeView.flStores.id -> {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    DialogLoading.show(requireActivity().supportFragmentManager, "")
-                    withContext(Dispatchers.Main) {
-                        (mContext as DashboardActivity).loadFrag(StoreAddFrag(), StoreAddFrag::class.java.name)
-                    }
-                }
+                (mContext as DashboardActivity).loadFrag(StoreFrag(), StoreFrag::class.java.name)
+            }
+            homeView.flComplaintFeedback.id -> {
+                (mContext as DashboardActivity).loadFrag(ComplaintFeedback(), ComplaintFeedback::class.java.name)
             }
         }
     }
@@ -63,6 +64,10 @@ class HomeFrag : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         (mContext as DashboardActivity).toolbarTitle.text = "Dashboard"
+        (mContext as DashboardActivity).dashView.dashToolbar.toolbarHome.visibility = View.GONE
+        (mContext as DashboardActivity).dashView.dashToolbar.toolbarNotification.visibility = View.VISIBLE
+
+        (mContext as DashboardActivity).showHamburgerIcon()
     }
 
     override fun onDestroy() {
