@@ -39,6 +39,6 @@ interface StoreDao {
     @Query("select * from TBL_STORE")
     suspend fun getAll() : List<StoreEntity>
 
-    @Query("select * from TBL_STORE where store_name like '%' || :searchQuery || '%' order by store_name asc")
+    @Query("select * from TBL_STORE where store_name like '%' || :searchQuery || '%'")
     fun getSearchPaging(searchQuery:String) : PagingSource<Int, StoreEntity>
 }

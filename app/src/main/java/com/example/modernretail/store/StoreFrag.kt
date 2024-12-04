@@ -21,8 +21,10 @@ import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragStoreAddBinding
 import com.example.modernretail.databinding.FragStoreBinding
 import com.example.modernretail.others.AppUtils
+import com.example.modernretail.others.DialogLoading
 import com.example.xst.AppDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -50,12 +52,22 @@ class StoreFrag: Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        proceed()
+
+        DialogLoading.show(requireActivity().supportFragmentManager, "")
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                proceed()
+            } finally {
+                DialogLoading.dismiss()
+            }
+        }
+
+        //proceed()
     }
 
     private fun proceed() {
         storeViewModel = ViewModelProvider(requireActivity()).get(StoreViewModel::class.java)
-        storeAdapter = StoreAdapter(mContext,object :StoreAdapter.OnClick{
+        storeAdapter = StoreAdapter(mContext, object : StoreAdapter.OnClick {
             override fun onCallCLick(obj: StoreEntity) {
                 try {
                     val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -75,11 +87,12 @@ class StoreFrag: Fragment(), View.OnClickListener {
         })
         storeView.rvStoreL.adapter = storeAdapter
 
-        storeViewModel.storeSearch.observe(viewLifecycleOwner) {pagingData ->
+        storeViewModel.storeSearch.observe(viewLifecycleOwner) { pagingData ->
             storeAdapter.submitData(lifecycle, pagingData)
         }
 
-        storeView.searchStore.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        storeView.searchStore.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false    //true if the query has been handled by the listener, false to let the SearchView perform the default action.
             }
@@ -98,17 +111,6 @@ class StoreFrag: Fragment(), View.OnClickListener {
         storeView.fabAddStore.setOnClickListener {
             (mContext as DashboardActivity).loadFrag(StoreAddFrag(), StoreAddFrag::class.java.name)
         }
-
-  /*      storeView.smoothBottomBar.onItemSelected = { i->
-            when(i){
-                0->{
-                    Toast.makeText(mContext,"0",Toast.LENGTH_SHORT).show()
-                }
-                1->{
-                    Toast.makeText(mContext,"1",Toast.LENGTH_SHORT).show()
-                }
-            }
-        }*/
     }
 
     override fun onClick(v: View?) {

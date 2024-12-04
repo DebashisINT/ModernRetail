@@ -41,7 +41,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        style="@style/ll_style">
+                        style="@style/ll_style"
+                        android:clipToPadding="false"
+                        android:paddingBottom="150dp">
 
                         <Space
                             android:layout_width="match_parent"

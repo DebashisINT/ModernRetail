@@ -109,7 +109,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     fun loadFrag(mFrag: Fragment, tagValue: String, isAdd:Boolean = false) {
         DialogLoading.show(supportFragmentManager, "")
         lifecycleScope.launch(Dispatchers.IO) {
-            delay(50)
             try {
                 withContext(Dispatchers.Main) {
                     println("load_frag $tagValue")
@@ -150,10 +149,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                             .commitAllowingStateLoss()*/
                     }
                 }
-            }  catch (e: Exception) {
-                DialogLoading.dismiss()
-            }
-            finally {
+            } finally {
                 DialogLoading.dismiss()
             }
         }
@@ -184,7 +180,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                         }
                         backpressed = System.currentTimeMillis()
                     } else {
-                        delay(50)
                         super.onBackPressed()
                     }
                 }
