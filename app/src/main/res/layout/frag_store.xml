@@ -57,6 +57,7 @@
             android:layout_gravity="bottom|end">
 
             <me.ibrahimsn.lib.SmoothBottomBar
+                android:id="@+id/smooth_bottom_bar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 app:menu="@menu/bottom_nav_menu"

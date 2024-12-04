@@ -95,41 +95,20 @@ class StoreFrag: Fragment(), View.OnClickListener {
             }
         })
 
-        /*storeView.fabAddStore.setOnTouchListener { view, motionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    isDragging = false
-                    initialX = motionEvent.rawX
-                    initialY = motionEvent.rawY
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    isDragging = true
-
-                    val deltaX = motionEvent.rawX - initialX
-                    val deltaY = motionEvent.rawY - initialY
-
-                    val scaledDeltaX = deltaX * 0.5f
-                    val scaledDeltaY = deltaY * 0.5f
-
-                    view.x = view.x + scaledDeltaX
-                    view.y = view.y + scaledDeltaY
-
-                    initialX = motionEvent.rawX
-                    initialY = motionEvent.rawY
-                }
-                MotionEvent.ACTION_UP -> {
-                    if (!isDragging) {
-                        view.performClick()
-                        println("tag_float_chk inside")
-                    }
-                }
-            }
-            true
-        }*/
-
         storeView.fabAddStore.setOnClickListener {
             (mContext as DashboardActivity).loadFrag(StoreAddFrag(), StoreAddFrag::class.java.name)
         }
+
+  /*      storeView.smoothBottomBar.onItemSelected = { i->
+            when(i){
+                0->{
+                    Toast.makeText(mContext,"0",Toast.LENGTH_SHORT).show()
+                }
+                1->{
+                    Toast.makeText(mContext,"1",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }*/
     }
 
     override fun onClick(v: View?) {
