@@ -88,4 +88,7 @@ dependencies {
 
     // pdf creation
     implementation("com.itextpdf:itextpdf:5.5.13.4")
+
+    //smooth bottom bar
+    implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
 }
