@@ -17,16 +17,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.modernretail.DashboardActivity
+import com.example.modernretail.R
 import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragStoreAddBinding
 import com.example.modernretail.databinding.FragStoreBinding
 import com.example.modernretail.others.AppUtils
 import com.example.modernretail.others.DialogLoading
 import com.example.xst.AppDatabase
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import me.ibrahimsn.lib.OnItemSelectedListener
+import me.ibrahimsn.lib.SmoothBottomBar
 
 class StoreFrag: Fragment(), View.OnClickListener {
     private var binding: FragStoreBinding? = null
@@ -53,16 +57,14 @@ class StoreFrag: Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        DialogLoading.show(requireActivity().supportFragmentManager, "")
         lifecycleScope.launch(Dispatchers.Main) {
             try {
+                DialogLoading.show(requireActivity().supportFragmentManager, "")
                 proceed()
             } finally {
                 DialogLoading.dismiss()
             }
         }
-
-        //proceed()
     }
 
     private fun proceed() {
@@ -80,7 +82,6 @@ class StoreFrag: Fragment(), View.OnClickListener {
                     e.printStackTrace()
                 }
             }
-
             override fun onSyncCLick(obj: StoreEntity) {
                 println("tag_sync_click ${obj.store_name}")
             }

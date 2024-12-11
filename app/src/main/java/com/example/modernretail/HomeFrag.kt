@@ -2,21 +2,13 @@ package com.example.modernretail
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import com.example.modernretail.CompFeed.ComplaintFeedback
+import com.example.modernretail.compFeed.ComplaintFeedback
 import com.example.modernretail.databinding.FragHomeBinding
-import com.example.modernretail.others.DialogLoading
-import com.example.modernretail.store.StoreAddFrag
 import com.example.modernretail.store.StoreFrag
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFrag : Fragment(), View.OnClickListener {
     private var binding: FragHomeBinding? = null

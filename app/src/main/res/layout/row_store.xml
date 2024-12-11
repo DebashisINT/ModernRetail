@@ -512,7 +512,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:text="Operation"/>
+                            android:text="Operation"
+                            android:textColor="@color/color_blue_steel_dark"/>
 
                     </LinearLayout>
 
@@ -541,7 +542,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:text="Order"/>
+                            android:text="Order"
+                            android:textColor="@color/color_blue_steel_dark"/>
 
                     </LinearLayout>
 
@@ -570,7 +572,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:text="Survey"/>
+                            android:text="Survey"
+                            android:textColor="@color/color_blue_steel_dark"/>
 
                     </LinearLayout>
 
@@ -599,7 +602,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:text="Activity"/>
+                            android:text="Activity"
+                            android:textColor="@color/color_blue_steel_dark"/>
 
                     </LinearLayout>
 

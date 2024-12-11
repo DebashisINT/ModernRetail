@@ -18,7 +18,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
-                style="@style/card_style">
+                style="@style/card_style"
+                app:cardBackgroundColor="@color/color_green_pastel">
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchStore"
@@ -44,8 +45,38 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_plus"
             android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_65sdp"
+            app:backgroundTint="@color/color_blue_steel_dark"
+            app:tint="@color/color_white"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/card_style"
             android:layout_margin="@dimen/_10sdp"
-            app:backgroundTint="@color/color_green_pastel" />
+            app:cardBackgroundColor="@color/color_blue_steel"
+            android:layout_gravity="bottom|end">
+
+            <me.ibrahimsn.lib.SmoothBottomBar
+                android:id="@+id/smooth_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                app:menu="@menu/bottom_nav_menu"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                app:indicatorRadius="@dimen/_10sdp"
+                app:iconSize="@dimen/_14sdp"
+                app:iconTintActive="@color/color_black"
+                app:iconTint="@color/color_grey_light"
+                app:itemTextColor="@color/color_black"
+                app:textColor="@color/color_black"
+                app:backgroundColor="@color/color_trans"
+                app:cornerRadius="10dp"
+                app:iconMargin="5dp"
+                app:indicatorColor="@color/color_blue_baby" />
+
+        </androidx.cardview.widget.CardView>
 
     </FrameLayout>
 

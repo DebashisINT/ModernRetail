@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -33,6 +34,7 @@ import com.example.modernretail.others.DialogLoading
 import com.example.modernretail.store.StoreAddFrag
 import com.google.android.material.navigation.NavigationView
 import com.vmadalin.easypermissions.EasyPermissions
+import com.yalantis.ucrop.UCrop
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -124,6 +126,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                         dashView.dashToolbar.toolbarNotification.visibility = View.GONE
                         showBackArrow()
                     }
+
                     if (supportFragmentManager.findFragmentByTag(tag) == null || mFrag is HomeFrag) {
                         if (isAdd) {
                             supportFragmentManager.beginTransaction()
@@ -204,6 +207,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
     }
 
+    fun captureImageCrop(){
+        var permissionL : ArrayList<String> = ArrayList()
+        permissionL.add(android.Manifest.permission.CAMERA)
+        if(hasPermission(permissionL.toTypedArray())){
+            try {
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(takePictureIntent, AppUtils.ACTION_CAMERA_CROP)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }else{
+            requestPermission(permissionL.toTypedArray(),AppUtils.REQ_PERMISSION_CAMERA,"Allow Camera Permissions.")
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK){
@@ -217,6 +235,30 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     imageBitmap.compress(Bitmap.CompressFormat.PNG,100,out)
                 }
 
+                val fm = supportFragmentManager.findFragmentById(dashView.fragContainerView.id)
+                if (fm is StoreAddFrag){
+                    (fm.updateImage(photoFile))
+                }
+            }
+            else  if(requestCode == AppUtils.ACTION_CAMERA_CROP){
+                val imageBitmap = data?.extras?.get("data") as Bitmap
+
+                val fileDir = this.filesDir
+                val fileName = DateTimeUtils.getCurrentDateTime().replace("-","_").replace(" ","_").replace(":","_")
+                val photoFile = File(fileDir, "$fileName.png")
+                FileOutputStream(photoFile).use { out ->
+                    imageBitmap.compress(Bitmap.CompressFormat.PNG,100,out)
+                }
+
+                val cropIntent = UCrop.of(Uri.fromFile(photoFile), Uri.fromFile(photoFile)) // croppedImageFile is where the cropped image will be saved
+                    .withAspectRatio(16f, 9f) // Optional aspect ratio
+                    .withMaxResultSize(500, 300) // Optional max size
+                    .getIntent(this)
+
+                startActivityForResult(cropIntent, AppUtils.ACTION_CAMERA_CROP_UCROP)
+            }else if(requestCode == AppUtils.ACTION_CAMERA_CROP_UCROP){
+                val resultUri = UCrop.getOutput(data!!)
+                val photoFile = File(resultUri!!.path)
                 val fm = supportFragmentManager.findFragmentById(dashView.fragContainerView.id)
                 if (fm is StoreAddFrag){
                     (fm.updateImage(photoFile))

@@ -83,6 +83,10 @@ dependencies {
 
     implementation("com.google.auth:google-auth-library-oauth2-http:1.3.0")
 
+    //shared pref
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+
     // easy permisson
     implementation("com.vmadalin:easypermissions-ktx:1.0.0")
 
@@ -91,4 +95,14 @@ dependencies {
 
     //smooth bottom bar
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
+
+    //shared preference
+    implementation ("com.marcinmoskala.PreferenceHolder:preferenceholder:1.51")
+
+    //crop image
+    implementation("com.github.yalantis:ucrop:2.2.8")
+
+    // location
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }

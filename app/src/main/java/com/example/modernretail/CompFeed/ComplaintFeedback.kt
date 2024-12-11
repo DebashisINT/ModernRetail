@@ -1,4 +1,4 @@
-package com.example.modernretail.CompFeed
+package com.example.modernretail.compFeed
 
 import android.content.Context
 import android.os.Bundle
@@ -6,15 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.modernretail.DashboardActivity
-import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragComplaintFeedbackBinding
-import com.example.modernretail.databinding.FragStoreBinding
-import com.example.xst.AppDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ComplaintFeedback: Fragment(), View.OnClickListener {
     private var binding: FragComplaintFeedbackBinding? = null

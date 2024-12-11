@@ -11,9 +11,10 @@ import android.view.Window
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import com.example.modernretail.databinding.DialogOkBinding
+import com.example.modernretail.others.Pref
 
 
-class DialogOk(var message: String,var listner: OnClick) : DialogFragment(), View.OnClickListener {
+class DialogOk(var title:String,var message: String,var listner: OnClick) : DialogFragment(), View.OnClickListener {
     private lateinit var mContext: Context
 
     private var binding: DialogOkBinding? = null
@@ -54,6 +55,7 @@ class DialogOk(var message: String,var listner: OnClick) : DialogFragment(), Vie
 
     fun process() {
         dialogView.tvMessage.text = message
+        dialogView.tvTitle.text = title
         dialogView.btnOk.setOnClickListener(this)
         dialogView.ivCross.setOnClickListener(this)
     }

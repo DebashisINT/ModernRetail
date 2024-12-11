@@ -45,7 +45,7 @@ class StoreAdapter(val mContext: Context, val listner:OnClick):
                 binding.tvStoreContactName.text = item.store_contact_name
                 binding.tvStoreContactNumber.text = item.store_contact_number
                 binding.tvStoreWhatsapp.text = item.store_contact_whatsapp
-                binding.tvStoreEmail.text = item.store_contact_email
+                binding.tvStoreEmail.text = item.store_email
                 binding.tvStoreType.text = item.store_type
                 binding.tvStoreSizeArea.text = item.store_size_area
 

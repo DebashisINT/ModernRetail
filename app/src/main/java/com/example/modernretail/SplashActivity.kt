@@ -15,6 +15,8 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.modernretail.databinding.ActivitySplashBinding
+import com.example.modernretail.others.Pref
+import com.marcinmoskala.kotlinpreferences.PreferenceHolder
 
 class SplashActivity : AppCompatActivity() {
 
@@ -38,9 +40,14 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed(kotlinx.coroutines.Runnable {
             splashView.tvAppName.clearAnimation()
             val anim = ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-            startActivity(Intent(this, LoginActivity::class.java),anim)
-            finish()
-        }, 2000)
+            if(Pref.IsLogdedIn){
+                startActivity(Intent(this, DashboardActivity::class.java),anim)
+                finish()
+            }else{
+                startActivity(Intent(this, LoginActivity::class.java),anim)
+                finish()
+            }
+        }, 1500)
     }
 
     override fun onDestroy() {

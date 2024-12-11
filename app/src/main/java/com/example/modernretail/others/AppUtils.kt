@@ -15,6 +15,9 @@ object AppUtils{
 
     val REQ_PERMISSION_CAMERA = 101
     val ACTION_CAMERA = 999
+    val ACTION_CAMERA_CROP = 998
+    val ACTION_CAMERA_CROP_UCROP = 997
+    val GPS = 102
 
     fun hideKeyboardClearFocus(activity: Activity) {
         try {

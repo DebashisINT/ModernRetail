@@ -12,9 +12,10 @@ import android.view.Window
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import com.example.modernretail.databinding.DialogYesNoBinding
+import com.example.modernretail.others.Pref
 
 @SuppressLint("StaticFieldLeak")
-class DialogYesNo(var message: String,var listner: OnClick) : DialogFragment(),View.OnClickListener {
+class DialogYesNo(var title:String,var message: String,var listner: OnClick) : DialogFragment(),View.OnClickListener {
     private lateinit var mContext: Context
 
     private var binding: DialogYesNoBinding? = null
@@ -55,6 +56,7 @@ class DialogYesNo(var message: String,var listner: OnClick) : DialogFragment(),V
 
     fun process() {
         dialogView.tvMessage.text = message
+        dialogView.tvTitle.text = title
         dialogView.btnYes.setOnClickListener(this)
         dialogView.btnNo.setOnClickListener(this)
         dialogView.ivCross.setOnClickListener(this)

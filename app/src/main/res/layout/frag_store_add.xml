@@ -80,6 +80,7 @@
                                     app:boxBackgroundMode="filled">
 
                                     <AutoCompleteTextView
+                                        android:id="@+id/tv_store_type"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="Store type"
@@ -176,6 +177,52 @@
                                         android:layout_height="match_parent"
                                         android:background="@color/color_trans"
                                         android:hint="Address" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/card_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                style="@style/ll_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_location" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/ll_textinput_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:minHeight="@dimen/_40sdp">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_pincode"
+                                        style="@style/text_style"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/color_trans"
+                                        android:hint="Pincode"
+                                        android:inputType="number"/>
                                 </com.google.android.material.textfield.TextInputLayout>
 
                             </LinearLayout>
@@ -404,6 +451,51 @@
                                         android:layout_height="match_parent"
                                         android:background="@color/color_trans"
                                         android:hint="Size/Area"
+                                        android:singleLine="true" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5sdp"/>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/card_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                style="@style/ll_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_remarks" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/ll_textinput_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_40sdp">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_store_remarks"
+                                        style="@style/text_style"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/color_trans"
+                                        android:hint="Remarks"
                                         android:singleLine="true" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
