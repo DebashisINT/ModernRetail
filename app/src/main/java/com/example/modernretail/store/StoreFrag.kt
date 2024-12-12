@@ -18,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.modernretail.DashboardActivity
 import com.example.modernretail.R
+import com.example.modernretail.database.StoreDtls
 import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragStoreAddBinding
 import com.example.modernretail.databinding.FragStoreBinding
@@ -70,7 +71,7 @@ class StoreFrag: Fragment(), View.OnClickListener {
     private fun proceed() {
         storeViewModel = ViewModelProvider(requireActivity()).get(StoreViewModel::class.java)
         storeAdapter = StoreAdapter(mContext, object : StoreAdapter.OnClick {
-            override fun onCallCLick(obj: StoreEntity) {
+            override fun onCallCLick(obj: StoreDtls) {
                 try {
                     val intent = Intent(Intent.ACTION_DIAL).apply {
                         data = Uri.parse("tel:${obj.store_contact_number}")
@@ -82,7 +83,7 @@ class StoreFrag: Fragment(), View.OnClickListener {
                     e.printStackTrace()
                 }
             }
-            override fun onSyncCLick(obj: StoreEntity) {
+            override fun onSyncCLick(obj: StoreDtls) {
                 println("tag_sync_click ${obj.store_name}")
             }
         })
