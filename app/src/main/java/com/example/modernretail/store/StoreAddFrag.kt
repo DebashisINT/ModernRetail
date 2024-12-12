@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.launch
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -41,6 +39,7 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
 
     var fetchLocation : Location = Location("")
     private var selectedStoreTypeID : String = ""
+    private var storeImagePath : String = ""
 
     private lateinit var mContext: Context
     override fun onAttach(context: Context) {
@@ -99,18 +98,18 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
             }
             storeAddView.tvStoreType.id -> {
                 var typeList : ArrayList<DropdownData> = ArrayList()
-                var shopTypeAdapter : DropdownAdapter
+                var storeTypeAdapter : DropdownAdapter
                 lifecycleScope.launch(Dispatchers.IO){
                     typeList = AppDatabase.getDatabase(mContext).storeTypeDao.getAllDropdown() as ArrayList<DropdownData>
                     withContext(Dispatchers.Main){
-                        shopTypeAdapter = DropdownAdapter(mContext, typeList,object : DropdownAdapter.OnClick{
+                        storeTypeAdapter = DropdownAdapter(mContext, typeList,object : DropdownAdapter.OnClick{
                             override fun onClick(item: DropdownData) {
                                 storeAddView.tvStoreType.setText(item.name,false) // false so that search method will not be called
                                 selectedStoreTypeID = item.id.toString()
                                 storeAddView.tvStoreType.dismissDropDown()
                             }
                         })
-                        storeAddView.tvStoreType.setAdapter(shopTypeAdapter)
+                        storeAddView.tvStoreType.setAdapter(storeTypeAdapter)
                         AppUtils.hideKeyboardClearFocus(mContext as Activity)
                         storeAddView.tvStoreType.showDropDown()
                     }
@@ -132,6 +131,7 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
     fun updateImage(file: File) {
         try {
             storeAddView.ivStoreImage.setImageURI(Uri.fromFile(file))
+            storeImagePath = file.absolutePath
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -167,7 +167,7 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     var storeObj : StoreEntity = StoreEntity()
-                    storeObj.store_id = DateTimeUtils.getCurrentDateTime().replace("-","_").replace(" ","_").replace(":","_")
+                    storeObj.store_id = Pref.user_id+"_"+DateTimeUtils.getCurrentDateTime().replace("-","").replace(" ","").replace(":","")
                     storeObj.store_name = storeAddView.etStoreName.text!!.trim().toString()
                     storeObj.store_address = storeAddView.etStoreAddress.text!!.trim().toString()
                     storeObj.store_pincode = storeAddView.etStorePincode.text!!.trim().toString()
@@ -175,7 +175,7 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
                     storeObj.store_long = fetchLocation.longitude.toString()
                     storeObj.store_contact_name = storeAddView.etStoreContactName.text!!.trim().toString()
                     storeObj.store_contact_number = storeAddView.etStoreContactNumber.text!!.trim().toString()
-                    storeObj.store_contact_whatsapp = storeAddView.etStoreContactWhatsapp.text!!.trim().toString()
+                    storeObj.store_whatsapp_number = storeAddView.etStoreContactWhatsapp.text!!.trim().toString()
                     storeObj.store_email = storeAddView.etStoreContactEmail.text!!.trim().toString()
                     storeObj.store_type = selectedStoreTypeID
                     storeObj.store_size_area = storeAddView.etStoreSizeArea.text!!.trim().toString()
@@ -190,6 +190,12 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
                         val response = SyncApi.syncStoreApi(mContext,storeObj.store_id)
                         if (response.status.equals("200")){
                             AppDatabase.getDatabase(mContext).storeDao.updateIsUploaded(true,storeObj.store_id)
+                        }
+                        if(!storeImagePath.equals("")){
+                            val response = SyncApi.syncStoreImageApi(mContext,storeObj.store_id,storeImagePath)
+                            if (response.status.equals("200")){
+                                var ff = 12365
+                            }
                         }
                     }
 

@@ -184,6 +184,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,EasyPermissions.
 
     private fun doLogin(userName: String, password: String, appV: String, deviceToken: String) {
         AppUtils.hideKeyboardClearFocus(this)
+        DialogLoading.show(supportFragmentManager, "")
         lifecycleScope.launch(Dispatchers.IO) {
             var response = ApiCall.create().login(userName, password, appV, deviceToken)
             withContext(Dispatchers.Main){
@@ -193,6 +194,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,EasyPermissions.
                     Pref.UserContactNumber = response.contact_number
                     getData()
                 }else{
+                    DialogLoading.dismiss()
                     BottomSheetMsg(response.message).show(supportFragmentManager, "msg")
                 }
             }
@@ -200,7 +202,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,EasyPermissions.
     }
 
     private fun getData(){
-        DialogLoading.show(supportFragmentManager, "")
         val loginDataApiJob = lifecycleScope.launch(Dispatchers.Main) {
             launch(Dispatchers.IO) {//get store type
                 try {
@@ -223,6 +224,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,EasyPermissions.
                         if (response.status.equals("200")) {
                             AppDatabase.getDatabase(this@LoginActivity).pinStateDao.deleteAll()
                             AppDatabase.getDatabase(this@LoginActivity).pinStateDao.insertAll(response.pin_state_list)
+                        }
+                    }
+                }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            launch(Dispatchers.IO) {//get store
+                try {
+                    if (AppDatabase.getDatabase(this@LoginActivity).storeDao.getAll().size == 0) {
+                        var response = ApiCall.create().getStore(Pref.user_id)
+                        if (response.status.equals("200")) {
+                            AppDatabase.getDatabase(this@LoginActivity).storeDao.deleteAll()
+                            AppDatabase.getDatabase(this@LoginActivity).storeDao.insertAll(response.store_list)
+                            AppDatabase.getDatabase(this@LoginActivity).storeDao.updateIsUploadedAll(true)
                         }
                     }
                 }

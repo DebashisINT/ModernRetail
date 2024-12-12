@@ -12,19 +12,24 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.modernretail.DashboardActivity
 import com.example.modernretail.R
+import com.example.modernretail.api.SyncApi
 import com.example.modernretail.database.StoreDtls
 import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragStoreAddBinding
 import com.example.modernretail.databinding.FragStoreBinding
 import com.example.modernretail.others.AppUtils
+import com.example.modernretail.others.BottomSheetMsg
 import com.example.modernretail.others.DialogLoading
+import com.example.modernretail.others.Pref
 import com.example.xst.AppDatabase
+import com.example.xst.utils.DialogOk
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -84,7 +89,26 @@ class StoreFrag: Fragment(), View.OnClickListener {
                 }
             }
             override fun onSyncCLick(obj: StoreDtls) {
-                println("tag_sync_click ${obj.store_name}")
+                DialogLoading.show(requireActivity().supportFragmentManager, "")
+                lifecycleScope.launch(Dispatchers.IO) {
+                    if(AppUtils.isOnline(mContext)){
+                        val response = SyncApi.syncStoreApi(mContext,obj.store_id)
+                        if (response.status.equals("200")){
+                            AppDatabase.getDatabase(mContext).storeDao.updateIsUploaded(true,obj.store_id)
+                        }
+                        withContext(Dispatchers.Main){
+                            DialogLoading.dismiss()
+                            DialogOk("Hi ${Pref.UserName}","Store synced successfully.",object : DialogOk.OnClick{
+                                override fun onOkClick() {
+
+                                }
+                            }).show(requireActivity().supportFragmentManager, "")
+                        }
+                    }else{
+                        DialogLoading.dismiss()
+                        BottomSheetMsg(ContextCompat.getString(mContext,R.string.msg_no_internet)).show(requireActivity().supportFragmentManager, "msg")
+                    }
+                }
             }
         })
         storeView.rvStoreL.adapter = storeAdapter
@@ -104,7 +128,7 @@ class StoreFrag: Fragment(), View.OnClickListener {
                 if (newText.isNullOrEmpty()) {
                     AppUtils.hideKeyboardClearFocus(mContext as Activity)
                     storeView.rvStoreL.smoothScrollToPosition(0)
-                    //shopView.rvShopL.scrollToPosition(0)
+                    //storeView.rvStoreL.scrollToPosition(0)
                 }
                 return false
             }

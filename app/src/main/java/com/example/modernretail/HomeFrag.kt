@@ -6,9 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.modernretail.api.SyncApi
 import com.example.modernretail.compFeed.ComplaintFeedback
 import com.example.modernretail.databinding.FragHomeBinding
 import com.example.modernretail.store.StoreFrag
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
 
 class HomeFrag : Fragment(), View.OnClickListener {
     private var binding: FragHomeBinding? = null
@@ -50,7 +55,7 @@ class HomeFrag : Fragment(), View.OnClickListener {
                 (mContext as DashboardActivity).loadFrag(StoreFrag(), StoreFrag::class.java.name)
             }
             homeView.flComplaintFeedback.id -> {
-                (mContext as DashboardActivity).loadFrag(ComplaintFeedback(), ComplaintFeedback::class.java.name)
+                //(mContext as DashboardActivity).loadFrag(ComplaintFeedback(), ComplaintFeedback::class.java.name)
             }
         }
     }
