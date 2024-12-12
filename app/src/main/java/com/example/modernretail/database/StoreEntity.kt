@@ -45,6 +45,12 @@ interface StoreDao {
     @Query("select * from MR_STORE")
     suspend fun getAll() : List<StoreEntity>
 
+    @Query("select * from MR_STORE where store_id = :store_id")
+    suspend fun getUnsyncStoreByID(store_id:String) : StoreEntity
+
+    @Query("update MR_STORE set isUploaded = :isUploaded where store_id = :store_id")
+    suspend fun updateIsUploaded(isUploaded:Boolean,store_id:String)
+
    /* @Query("select * from MR_STORE where store_name like '%' || :searchQuery || '%'")
     fun getSearchPaging(searchQuery:String) : PagingSource<Int, StoreEntity>*/
 

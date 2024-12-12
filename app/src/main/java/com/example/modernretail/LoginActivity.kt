@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,EasyPermissions.
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginView.root)
 
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.color_white))
 
         val windowInsetsController = ViewCompat.getWindowInsetsController(window.decorView)

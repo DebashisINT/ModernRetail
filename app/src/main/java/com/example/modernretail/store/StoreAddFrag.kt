@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.modernretail.DashboardActivity
 import com.example.modernretail.R
+import com.example.modernretail.api.SyncApi
 import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.databinding.FragStoreAddBinding
 import com.example.modernretail.others.AppUtils
@@ -179,8 +180,18 @@ class StoreAddFrag : Fragment(), View.OnClickListener {
                     storeObj.store_type = selectedStoreTypeID
                     storeObj.store_size_area = storeAddView.etStoreSizeArea.text!!.trim().toString()
                     storeObj.store_state_id = AppDatabase.getDatabase(mContext).pinStateDao.getStateIDByPinCode(storeObj.store_pincode)
+                    storeObj.remarks = storeAddView.etStoreRemarks.text!!.trim().toString()
+                    storeObj.create_date_time = DateTimeUtils.getCurrentDateTime()
+                    storeObj.isUploaded = false
 
                     AppDatabase.getDatabase(mContext).storeDao.insert(storeObj)
+
+                    if(AppUtils.isOnline(mContext)){
+                        val response = SyncApi.syncStoreApi(mContext,storeObj.store_id)
+                        if (response.status.equals("200")){
+                            AppDatabase.getDatabase(mContext).storeDao.updateIsUploaded(true,storeObj.store_id)
+                        }
+                    }
 
                     withContext(Dispatchers.Main){
                         DialogLoading.dismiss()

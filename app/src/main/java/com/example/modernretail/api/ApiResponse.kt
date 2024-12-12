@@ -1,6 +1,7 @@
 package com.example.mineee.api
 
 import com.example.modernretail.database.PinStateEntity
+import com.example.modernretail.database.StoreEntity
 import com.example.modernretail.database.StoreTypeEntity
 
 
@@ -13,3 +14,6 @@ data class LoginResponse(var user_name:String="",var user_id:String="",var conta
 data class StoreTypeResponse(var store_type_list:ArrayList<StoreTypeEntity>):BaseResponse()
 
 data class PinStateResponse(var pin_state_list:ArrayList<PinStateEntity>):BaseResponse()
+
+//store sync
+data class StoreSync(var user_id:String="",var store_list:ArrayList<StoreEntity> = ArrayList()):BaseResponse()

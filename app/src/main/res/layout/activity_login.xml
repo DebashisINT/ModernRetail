@@ -8,184 +8,203 @@
     tools:context=".LoginActivity"
     style="@style/ll_root_style">
 
-    <ImageView
-        android:id="@+id/tv_app_name"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_gravity="center"
-        android:src="@drawable/icon_logo"
-        android:layout_marginTop="@dimen/_20sdp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         style="@style/ll_style"
-        android:gravity="center|top"
-        android:layout_marginTop="@dimen/_30sdp">
+        android:background="@color/color_white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/tv_app_name"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
-            android:text="Login"
-            android:textSize="@dimen/_25sdp"
-            style="@style/text_header_style"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/poppins_medium"/>
+            android:src="@drawable/icon_logo" />
 
-        <View
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_2sdp"
-            android:background="@color/color_button"
-            android:layout_marginTop="@dimen/_3sdp"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_15sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ll_style"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_25sdp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                style="@style/card_style">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/ll_style"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_user"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        app:tint="@color/color_black"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/ll_textinput_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_username"
-                            style="@style/text_style"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_trans"
-                            android:hint="Username"
-                            android:singleLine="true"
-                            android:textCursorDrawable="@drawable/cursor"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_10sdp"/>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                style="@style/card_style">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/ll_style"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_lock"
-                        android:layout_marginLeft="@dimen/_10sdp"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/ll_textinput_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        app:passwordToggleEnabled="true">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_password"
-                            style="@style/text_style"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_trans"
-                            android:hint="Password"
-                            android:singleLine="true"
-                            android:inputType="textPassword"
-                            android:textCursorDrawable="@drawable/cursor"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_5sdp" />
-
-            <CheckBox
-                android:id="@+id/cb_remember_me"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remember Me"
-                style="@style/text_style"
-                android:layout_gravity="end" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_5sdp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_180sdp"
-                android:layout_height="@dimen/_45sdp"
-                style="@style/card_style"
-                app:cardBackgroundColor="@color/color_button">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Login"
-                    android:elevation="0dp"
-                    style="@style/button_style" />
-
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_5sdp" />
+            style="@style/ll_style">
 
             <TextView
-                android:id="@+id/tv_app_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="App version"
-                style="@style/text_style"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"/>
+                android:layout_gravity="center"
+                android:text="Login"
+                android:textSize="@dimen/_25sdp"
+                style="@style/text_header_style"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <View
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/color_button" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ll_style"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    style="@style/card_style">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/ll_style"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_user"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            app:tint="@color/color_black"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/ll_textinput_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_username"
+                                style="@style/text_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/color_trans"
+                                android:hint="Username"
+                                android:singleLine="true"
+                                android:textCursorDrawable="@drawable/cursor"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    style="@style/card_style">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/ll_style"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_lock"
+                            android:layout_marginLeft="@dimen/_10sdp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/ll_textinput_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            app:passwordToggleEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_password"
+                                style="@style/text_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/color_trans"
+                                android:hint="Password"
+                                android:singleLine="true"
+                                android:inputType="textPassword"
+                                android:textCursorDrawable="@drawable/cursor"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp" />
+
+                <CheckBox
+                    android:id="@+id/cb_remember_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remember Me"
+                    style="@style/text_style"
+                    android:layout_gravity="end" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    style="@style/card_style"
+                    app:cardBackgroundColor="@color/color_button">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Login"
+                        android:elevation="0dp"
+                        style="@style/button_style" />
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_5sdp" />
+
+                <TextView
+                    android:id="@+id/tv_app_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="App version"
+                    style="@style/text_style"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp"
-        android:src="@drawable/login_banner"
-        android:scaleType="centerCrop" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/login_banner"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
 
 </LinearLayout>
